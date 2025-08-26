@@ -1,0 +1,632 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated color tokens to match Mutexly design brief */
+  --background: oklch(0.08 0.01 240);
+  --foreground: oklch(0.95 0.02 240);
+  --card: oklch(0.12 0.02 240);
+  --card-foreground: oklch(0.95 0.02 240);
+  --popover: oklch(0.12 0.02 240);
+  --popover-foreground: oklch(0.95 0.02 240);
+  --primary: oklch(0.65 0.25 200);
+  --primary-foreground: oklch(0.08 0.01 240);
+  --secondary: oklch(0.18 0.03 240);
+  --secondary-foreground: oklch(0.95 0.02 240);
+  --muted: oklch(0.15 0.02 240);
+  --muted-foreground: oklch(0.65 0.05 240);
+  --accent: oklch(0.7 0.3 180);
+  --accent-foreground: oklch(0.08 0.01 240);
+  --destructive: oklch(0.6 0.25 15);
+  --destructive-foreground: oklch(0.95 0.02 240);
+  --border: oklch(0.2 0.03 240);
+  --input: oklch(0.15 0.02 240);
+  --ring: oklch(0.65 0.25 200 / 0.5);
+  --chart-1: oklch(0.65 0.25 200);
+  --chart-2: oklch(0.7 0.3 180);
+  --chart-3: oklch(0.75 0.25 160);
+  --chart-4: oklch(0.6 0.2 220);
+  --chart-5: oklch(0.68 0.28 140);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.12 0.02 240);
+  --sidebar-foreground: oklch(0.95 0.02 240);
+  --sidebar-primary: oklch(0.65 0.25 200);
+  --sidebar-primary-foreground: oklch(0.08 0.01 240);
+  --sidebar-accent: oklch(0.7 0.3 180);
+  --sidebar-accent-foreground: oklch(0.08 0.01 240);
+  --sidebar-border: oklch(0.2 0.03 240);
+  --sidebar-ring: oklch(0.65 0.25 200 / 0.5);
+}
+
+.dark {
+  --background: oklch(0.05 0.01 240);
+  --foreground: oklch(0.98 0.01 240);
+  --card: oklch(0.08 0.02 240);
+  --card-foreground: oklch(0.98 0.01 240);
+  --popover: oklch(0.08 0.02 240);
+  --popover-foreground: oklch(0.98 0.01 240);
+  --primary: oklch(0.7 0.3 200);
+  --primary-foreground: oklch(0.05 0.01 240);
+  --secondary: oklch(0.15 0.03 240);
+  --secondary-foreground: oklch(0.98 0.01 240);
+  --muted: oklch(0.12 0.02 240);
+  --muted-foreground: oklch(0.7 0.05 240);
+  --accent: oklch(0.75 0.35 160);
+  --accent-foreground: oklch(0.05 0.01 240);
+  --destructive: oklch(0.65 0.3 15);
+  --destructive-foreground: oklch(0.98 0.01 240);
+  --border: oklch(0.18 0.03 240);
+  --input: oklch(0.12 0.02 240);
+  --ring: oklch(0.7 0.3 200 / 0.6);
+  --chart-1: oklch(0.7 0.3 200);
+  --chart-2: oklch(0.75 0.35 160);
+  --chart-3: oklch(0.68 0.28 140);
+  --chart-4: oklch(0.65 0.25 220);
+  --chart-5: oklch(0.72 0.32 180);
+  --sidebar: oklch(0.08 0.02 240);
+  --sidebar-foreground: oklch(0.98 0.01 240);
+  --sidebar-primary: oklch(0.7 0.3 200);
+  --sidebar-primary-foreground: oklch(0.05 0.01 240);
+  --sidebar-accent: oklch(0.75 0.35 160);
+  --sidebar-accent-foreground: oklch(0.05 0.01 240);
+  --sidebar-border: oklch(0.18 0.03 240);
+  --sidebar-ring: oklch(0.7 0.3 200 / 0.6);
+}
+
+@theme inline {
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-geist-mono);
+  /* Added Space Grotesk for headings */
+  --font-heading: var(--font-space-grotesk);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Adding custom animation keyframes for smooth, professional effects */
+  --animate-gradient-shift: gradient-shift 8s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
+  --animate-text-shimmer: text-shimmer 3s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  /* Premium futuristic animations and effects */
+  --animate-neural-pulse: neural-pulse 2s ease-in-out infinite;
+  --animate-holographic-glow: holographic-glow 3s ease-in-out infinite;
+  --animate-matrix-rain: matrix-rain 8s linear infinite;
+  --animate-data-stream: data-stream 4s ease-in-out infinite;
+  --animate-quantum-float: quantum-float 8s ease-in-out infinite;
+  --animate-parallax-drift: parallax-drift 12s ease-in-out infinite;
+  --animate-cyber-glitch: cyber-glitch 0.3s ease-in-out infinite;
+  --animate-neon-flicker: neon-flicker 1.5s ease-in-out infinite;
+  --animate-morphing-gradient: morphing-gradient 10s ease-in-out infinite;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom keyframe animations for modern, professional effects */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Premium futuristic animations and effects */
+@keyframes neural-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(120, 119, 198, 0.3), 0 0 40px rgba(120, 119, 198, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(120, 119, 198, 0.6), 0 0 60px rgba(120, 119, 198, 0.2);
+  }
+}
+
+@keyframes holographic-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(120, 119, 198, 0.4), inset 0 0 20px rgba(120, 119, 198, 0.1);
+    border-color: rgba(120, 119, 198, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(120, 119, 198, 0.8), inset 0 0 30px rgba(120, 119, 198, 0.2);
+    border-color: rgba(120, 119, 198, 0.6);
+  }
+}
+
+@keyframes matrix-rain {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes data-stream {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes quantum-float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(-20px) rotate(270deg);
+  }
+}
+
+@keyframes parallax-drift {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(10px) translateY(-5px);
+  }
+  50% {
+    transform: translateX(-5px) translateY(-10px);
+  }
+  75% {
+    transform: translateX(-10px) translateY(-5px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes cyber-glitch {
+  0%,
+  100% {
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+  }
+  10% {
+    transform: translate(-2px, 2px);
+    filter: hue-rotate(90deg);
+  }
+  20% {
+    transform: translate(-2px, -2px);
+    filter: hue-rotate(180deg);
+  }
+  30% {
+    transform: translate(2px, 2px);
+    filter: hue-rotate(270deg);
+  }
+  40% {
+    transform: translate(2px, -2px);
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes neon-flicker {
+  0%,
+  100% {
+    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+  }
+  50% {
+    text-shadow: 0 0 2px currentColor, 0 0 5px currentColor, 0 0 8px currentColor;
+  }
+}
+
+@keyframes morphing-gradient {
+  0% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    background-position: 100% 50%;
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    background-position: 100% 100%;
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    background-position: 0% 100%;
+    filter: hue-rotate(270deg);
+  }
+  100% {
+    background-position: 0% 50%;
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Enhanced particle effects and mobile menu animations */
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced particle density and performance optimizations */
+@keyframes enhanced-particle-float {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) rotate(90deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-15px) translateX(-5px) rotate(180deg);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(-25px) translateX(-10px) rotate(270deg);
+    opacity: 1;
+  }
+}
+
+/* Premium utility classes for futuristic effects */
+.animate-neural-pulse {
+  animation: neural-pulse 2s ease-in-out infinite;
+}
+
+.animate-holographic-glow {
+  animation: holographic-glow 3s ease-in-out infinite;
+}
+
+.animate-matrix-rain {
+  animation: matrix-rain 8s linear infinite;
+}
+
+.animate-data-stream {
+  animation: data-stream 4s ease-in-out infinite;
+}
+
+.animate-quantum-float {
+  animation: quantum-float 8s ease-in-out infinite;
+}
+
+.animate-parallax-drift {
+  animation: parallax-drift 12s ease-in-out infinite;
+}
+
+.animate-cyber-glitch {
+  animation: cyber-glitch 0.3s ease-in-out infinite;
+}
+
+.animate-neon-flicker {
+  animation: neon-flicker 1.5s ease-in-out infinite;
+}
+
+.animate-morphing-gradient {
+  animation: morphing-gradient 10s ease-in-out infinite;
+  background-size: 400% 400%;
+}
+
+/* Added mobile menu slide animation */
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+/* Enhanced particle effects for higher density */
+.enhanced-particles {
+  animation: enhanced-particle-float 12s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Performance optimized hover effects */
+.premium-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+.premium-hover:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 12px 24px rgba(31, 38, 135, 0.37), 0 0 20px rgba(0, 255, 127, 0.1);
+}
+
+/* Interactive button states with coming soon feedback */
+.interactive-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.interactive-button:active {
+  transform: scale(0.98);
+}
+
+.interactive-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(112, 255, 255, 0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.interactive-button:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Glassmorphism and premium hover effects */
+.glass-card {
+  backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* 3D transform utilities for premium cards */
+.transform-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-3d-hover {
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-3d-hover:hover {
+  transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+}
+
+/* Cinematic section transitions */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.section-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.parallax-layer {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.hologram-text {
+  background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff00, #ffff00);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: morphing-gradient 8s ease-in-out infinite;
+}
+
+.cyber-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(120, 119, 198, 0.4), transparent);
+  animation: data-stream 3s ease-in-out infinite;
+}
+
+/* Adding hamburger menu specific animations */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hamburger-to-x {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes menu-slide-in {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Enhanced mobile menu utility classes */
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  opacity: 0;
+}
+
+.animate-hamburger-to-x {
+  animation: hamburger-to-x 0.3s ease-in-out;
+}
+
+.animate-menu-slide-in {
+  animation: menu-slide-in 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Enhanced hamburger button hover effects */
+.hamburger-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.hamburger-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.2) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+  border-radius: 50%;
+}
+
+.hamburger-button:hover::before {
+  width: 60px;
+  height: 60px;
+}
+
+/* Mobile menu backdrop blur enhancement */
+.menu-backdrop {
+  backdrop-filter: blur(20px) saturate(150%);
+  background: rgba(0, 0, 0, 0.6);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Menu item hover glow effects */
+.menu-item-glow {
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.menu-item-glow:hover {
+  text-shadow: 0 0 20px rgba(34, 211, 238, 0.8), 0 0 40px rgba(34, 211, 238, 0.4);
+  transform: scale(1.05);
+}
+
+.menu-item-glow::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #22d3ee, #14b8a6);
+  transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.menu-item-glow:hover::after {
+  width: 100%;
+}
