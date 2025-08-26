@@ -13,6 +13,7 @@ export function TypewriterText({ text, delay = 0, speed = 50, className = "" }: 
   const [displayText, setDisplayText] = useState("")
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
+  const [isComplete, setIsComplete] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -32,13 +33,15 @@ export function TypewriterText({ text, delay = 0, speed = 50, className = "" }: 
       }, speed)
 
       return () => clearTimeout(timer)
+    } else if (currentIndex === text.length && !isComplete) {
+      setIsComplete(true)
     }
-  }, [currentIndex, text, speed, isVisible])
+  }, [currentIndex, text, speed, isVisible, isComplete])
 
   return (
     <span className={className}>
       {displayText}
-      <span className="animate-pulse">|</span>
+      {!isComplete && <span className="animate-pulse">|</span>}
     </span>
   )
 }
