@@ -30,9 +30,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${spaceGrotesk.variable} ${dmSans.variable}`}
+        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${spaceGrotesk.variable} ${dmSans.variable} overflow-x-hidden`}
+        style={{
+          WebkitOverflowScrolling: "touch",
+          touchAction: "pan-y",
+          overscrollBehavior: "contain",
+        }}
       >
         {children}
       </body>

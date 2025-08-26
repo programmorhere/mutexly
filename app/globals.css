@@ -138,8 +138,38 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  /* Added mobile scrolling fixes */
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: manipulation;
+  }
+
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: manipulation;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* Ensure all interactive elements allow scrolling */
+  * {
+    touch-action: manipulation;
+  }
+
+  /* Allow scrolling on specific interactive elements */
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    touch-action: manipulation;
   }
 }
 
@@ -351,7 +381,7 @@
   }
 }
 
-/* Enhanced particle density and performance optimizations */
+/* Enhanced particle effects for higher density */
 @keyframes enhanced-particle-float {
   0%,
   100% {
@@ -370,59 +400,6 @@
     transform: translateY(-25px) translateX(-10px) rotate(270deg);
     opacity: 1;
   }
-}
-
-/* Premium utility classes for futuristic effects */
-.animate-neural-pulse {
-  animation: neural-pulse 2s ease-in-out infinite;
-}
-
-.animate-holographic-glow {
-  animation: holographic-glow 3s ease-in-out infinite;
-}
-
-.animate-matrix-rain {
-  animation: matrix-rain 8s linear infinite;
-}
-
-.animate-data-stream {
-  animation: data-stream 4s ease-in-out infinite;
-}
-
-.animate-quantum-float {
-  animation: quantum-float 8s ease-in-out infinite;
-}
-
-.animate-parallax-drift {
-  animation: parallax-drift 12s ease-in-out infinite;
-}
-
-.animate-cyber-glitch {
-  animation: cyber-glitch 0.3s ease-in-out infinite;
-}
-
-.animate-neon-flicker {
-  animation: neon-flicker 1.5s ease-in-out infinite;
-}
-
-.animate-morphing-gradient {
-  animation: morphing-gradient 10s ease-in-out infinite;
-  background-size: 400% 400%;
-}
-
-/* Added mobile menu slide animation */
-.animate-slide-in-right {
-  animation: slide-in-right 0.3s ease-out;
-}
-
-.animate-fade-in {
-  animation: fade-in 0.2s ease-out;
-}
-
-/* Enhanced particle effects for higher density */
-.enhanced-particles {
-  animation: enhanced-particle-float 12s ease-in-out infinite;
-  will-change: transform, opacity;
 }
 
 /* Performance optimized hover effects */

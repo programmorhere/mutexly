@@ -40,15 +40,15 @@ export function ParticleBackground() {
 
     const createParticles = () => {
       const particles: Particle[] = []
-      // <CHANGE> Performance guardrails - desktop vs mobile particle count
+      // Performance guardrails - desktop vs mobile particle count
       const isMobile = window.innerWidth < 768
-      const particleCount = isMobile 
+      const particleCount = isMobile
         ? Math.min(80, Math.floor((canvas.width * canvas.height) / 12000))
         : Math.min(160, Math.floor((canvas.width * canvas.height) / 8000))
 
       for (let i = 0; i < particleCount; i++) {
         const type = Math.random() < 0.6 ? "primary" : Math.random() < 0.8 ? "accent" : "glow"
-        // <CHANGE> Reduced speed for mobile performance
+        // Reduced speed for mobile performance
         const speedMultiplier = isMobile ? 0.6 : 1
         const vx = (Math.random() - 0.5) * (type === "glow" ? 0.3 : 0.8) * speedMultiplier
         const vy = (Math.random() - 0.5) * (type === "glow" ? 0.3 : 0.8) * speedMultiplier
@@ -71,7 +71,7 @@ export function ParticleBackground() {
       particlesRef.current = particles
     }
 
-    // <CHANGE> Throttled mouse move handler for performance
+    // Throttled mouse move handler for performance
     let mouseMoveTimeout: NodeJS.Timeout
     const handleMouseMove = (e: MouseEvent) => {
       clearTimeout(mouseMoveTimeout)
@@ -89,10 +89,10 @@ export function ParticleBackground() {
       mouseRef.current.isActive = false
     }
 
-    // <CHANGE> Throttled touch handler for mobile performance
+    // Throttled touch handler for mobile performance
     let touchMoveTimeout: NodeJS.Timeout
     const handleTouchMove = (e: TouchEvent) => {
-      e.preventDefault()
+      // Removed e.preventDefault() to allow natural scrolling
       clearTimeout(touchMoveTimeout)
       touchMoveTimeout = setTimeout(() => {
         const rect = canvas.getBoundingClientRect()
@@ -113,7 +113,7 @@ export function ParticleBackground() {
 
     const handleDeviceOrientation = (e: DeviceOrientationEvent) => {
       if (e.gamma !== null && e.beta !== null) {
-        // <CHANGE> Reduced device orientation influence for smoother mobile experience
+        // Reduced device orientation influence for smoother mobile experience
         deviceOrientationRef.current = {
           x: (e.gamma / 90) * canvas.width * 0.05,
           y: (e.beta / 90) * canvas.height * 0.05,
@@ -122,7 +122,7 @@ export function ParticleBackground() {
     }
 
     const animate = (currentTime: number) => {
-      // <CHANGE> FPS cap at 60fps for performance
+      // FPS cap at 60fps for performance
       if (currentTime - lastFrameTime.current < 16.67) {
         animationRef.current = requestAnimationFrame(animate)
         return
@@ -146,7 +146,7 @@ export function ParticleBackground() {
         let forceX = 0
         let forceY = 0
 
-        // <CHANGE> Improved mouse/touch interaction with proper radius
+        // Improved mouse/touch interaction with proper radius
         if (mouse.isActive) {
           const dx = mouse.x - particle.x
           const dy = mouse.y - particle.y
@@ -175,7 +175,7 @@ export function ParticleBackground() {
         particle.y += particle.vy
         particle.pulsePhase += 0.02
 
-        // <CHANGE> Bounce behavior to keep particles in viewport
+        // Bounce behavior to keep particles in viewport
         if (particle.x <= 0 || particle.x >= canvas.width) {
           particle.vx *= -1
           particle.originalVx *= -1
@@ -274,10 +274,10 @@ export function ParticleBackground() {
       createParticles()
     }
 
-    // <CHANGE> Bind events to window/document for click-through behavior
+    // Bind events to window/document for click-through behavior
     window.addEventListener("mousemove", handleMouseMove)
     window.addEventListener("mouseleave", handleMouseLeave)
-    window.addEventListener("touchmove", handleTouchMove, { passive: false })
+    window.addEventListener("touchmove", handleTouchMove, { passive: true })
     window.addEventListener("touchend", handleTouchEnd)
 
     // Request device orientation permission on iOS
@@ -311,6 +311,6 @@ export function ParticleBackground() {
     }
   }, [])
 
-  // <CHANGE> Set z-index to 0 to ensure click-through behavior
+  // Set z-index to 0 to ensure click-through behavior
   return <canvas ref={canvasRef} className="absolute inset-0" style={{ zIndex: 0 }} />
 }
