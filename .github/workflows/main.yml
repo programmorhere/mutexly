@@ -27,8 +27,8 @@ jobs:
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ ftp://82.197.80.243 }}
-          username: ${{ u580744263.mutexly.com }}
-          password: ${{ Scriptix@278 }}
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
           server-dir: public_html/
           local-dir: out/
