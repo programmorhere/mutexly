@@ -478,6 +478,7 @@ export default function HomePage() {
                   </Button>
                 </form>
 
+
                 <div className="mt-10 pt-8 pb-8 border-t border-border text-center">
                   <p className="text-muted-foreground">
                     Or reach us directly at{" "}
