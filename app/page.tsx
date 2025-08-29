@@ -13,6 +13,7 @@ import { TypewriterText } from "@/components/typewriter-text"
 import { GlassmorphismCard } from "@/components/glassmorphism-card"
 import { MobileMenu } from "@/components/mobile-menu"
 import { ComingSoonButton } from "@/components/coming-soon-tooltip"
+import Swal from "sweetalert2"
 import {
   CheckCircle,
   ArrowRight,
@@ -364,15 +365,86 @@ export default function HomePage() {
                 <CardDescription>Send us a message and we'll get back to you soon.</CardDescription>
               </CardHeader>
               <CardContent className="pt-0">
-                <form className="space-y-8">
+                <form
+                    className="space-y-8"
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+
+                      const btn = e.currentTarget.querySelector("button[type='submit']") as HTMLButtonElement;
+                      const name = (document.getElementById("name") as HTMLInputElement).value.trim();
+                      const email = (document.getElementById("email") as HTMLInputElement).value.trim();
+                      const message = (document.getElementById("message") as HTMLTextAreaElement).value.trim();
+
+                      // Validation
+                      if (!name || !email || !message) {
+                        Swal.fire({
+                          icon: "warning",
+                          title: "Missing Fields",
+                          text: "Please fill in all fields before sending.",
+                        });
+                        return;
+                      }
+
+                      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                      if (!emailRegex.test(email)) {
+                        Swal.fire({
+                          icon: "error",
+                          title: "Invalid Email",
+                          text: "Please enter a valid email address.",
+                        });
+                        return;
+                      }
+
+                      try {
+                        btn.disabled = true;
+                        btn.innerText = "Sending...";
+
+                        const res = await fetch("/api/send-email", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({
+                            subject: `Contact from ${name}`,
+                            text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+                          }),
+                        });
+
+                        const data = await res.json();
+                        if (data.success) {
+                          Swal.fire({
+                            icon: "success",
+                            title: "Message Sent!",
+                            text: "Thanks for reaching out. We’ll get back to you soon.",
+                          });
+                          (document.getElementById("name") as HTMLInputElement).value = "";
+                          (document.getElementById("email") as HTMLInputElement).value = "";
+                          (document.getElementById("message") as HTMLTextAreaElement).value = "";
+                        } else {
+                          Swal.fire({
+                            icon: "error",
+                            title: "Failed",
+                            text: data.error || "Something went wrong. Please try again later.",
+                          });
+                        }
+                      } catch (err: any) {
+                        Swal.fire({
+                          icon: "error",
+                          title: "Error",
+                          text: err.message,
+                        });
+                      } finally {
+                        btn.disabled = false;
+                        btn.innerText = "Send Message";
+                      }
+                    }}
+                >
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-3">
                       Name
                     </label>
                     <Input
-                      id="name"
-                      placeholder="Your name"
-                      className="premium-hover glass-card focus:animate-holographic-glow h-12"
+                        id="name"
+                        placeholder="Your name"
+                        className="premium-hover glass-card focus:animate-holographic-glow h-12"
                     />
                   </div>
                   <div>
@@ -380,10 +452,10 @@ export default function HomePage() {
                       Email
                     </label>
                     <Input
-                      id="email"
-                      type="email"
-                      placeholder="your.email@example.com"
-                      className="premium-hover glass-card focus:animate-holographic-glow h-12"
+                        id="email"
+                        type="email"
+                        placeholder="your.email@example.com"
+                        className="premium-hover glass-card focus:animate-holographic-glow h-12"
                     />
                   </div>
                   <div>
@@ -391,13 +463,16 @@ export default function HomePage() {
                       Message
                     </label>
                     <Textarea
-                      id="message"
-                      placeholder="Tell us about your project or question..."
-                      rows={6}
-                      className="premium-hover glass-card focus:animate-holographic-glow resize-none"
+                        id="message"
+                        placeholder="Tell us about your project or question..."
+                        rows={6}
+                        className="premium-hover glass-card focus:animate-holographic-glow resize-none"
                     />
                   </div>
-                  <Button type="submit" className="w-full premium-hover animate-neural-pulse cyber-border h-12">
+                  <Button
+                      type="submit"
+                      className="w-full premium-hover animate-neural-pulse cyber-border h-12"
+                  >
                     Send Message
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </Button>
@@ -407,14 +482,16 @@ export default function HomePage() {
                   <p className="text-muted-foreground">
                     Or reach us directly at{" "}
                     <a
-                      href="mailto:contact@mutexly.com"
-                      className="text-primary hover:underline transition-all duration-300 premium-hover hologram-text"
+                        href="mailto:info@mutexly.com"
+                        className="text-primary hover:underline transition-all duration-300 premium-hover hologram-text"
                     >
-                      contact@mutexly.com
+                      info@mutexly.com
                     </a>
                   </p>
                 </div>
               </CardContent>
+
+
             </GlassmorphismCard>
           </ScrollReveal>
         </div>
@@ -474,14 +551,14 @@ export default function HomePage() {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-primary transition-colors">
-                    Careers
-                  </a>
+                  {/*<a href="#" className="hover:text-primary transition-colors">*/}
+                  {/*  Careers*/}
+                  {/*</a>*/}
                 </li>
                 <li>
-                  <a href="#" className="hover:text-primary transition-colors">
-                    Blog
-                  </a>
+                  {/*<a href="#" className="hover:text-primary transition-colors">*/}
+                  {/*  Blog*/}
+                  {/*</a>*/}
                 </li>
               </ul>
             </div>
@@ -489,25 +566,38 @@ export default function HomePage() {
               <h4 className="font-semibold font-[family-name:var(--font-heading)] mb-4">Legal</h4>
               <ul className="space-y-2 text-muted-foreground">
                 <li>
-                  <a href="#" className="hover:text-primary transition-colors">
+                  <a
+                      href="/privacy-policy.pdf"
+                      download
+                      className="hover:text-primary transition-colors"
+                  >
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-primary transition-colors">
+                  <a
+                      href="/terms-of-service.pdf"
+                      download
+                      className="hover:text-primary transition-colors"
+                  >
                     Terms of Service
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-primary transition-colors">
+                  <a
+                      href="/cookie-policy.pdf"
+                      download
+                      className="hover:text-primary transition-colors"
+                  >
                     Cookie Policy
                   </a>
                 </li>
               </ul>
             </div>
+
           </div>
           <div className="mt-12 pt-8 border-t border-border text-center text-muted-foreground">
-            <p>&copy; 2024 Mutexly. All rights reserved.</p>
+            <p>&copy; 2025 Mutexly. All rights reserved.</p>
           </div>
         </div>
       </footer>
