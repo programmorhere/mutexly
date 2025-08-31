@@ -125,6 +125,9 @@ importers:
       next-themes:
         specifier: latest
         version: 0.4.6(react-dom@18.0.0(react@18.0.0))(react@18.0.0)
+      nodemailer:
+        specifier: ^7.0.5
+        version: 7.0.6
       react:
         specifier: ^18
         version: 18.0.0
@@ -149,6 +152,9 @@ importers:
       sonner:
         specifier: latest
         version: 2.0.7(react-dom@18.0.0(react@18.0.0))(react@18.0.0)
+      sweetalert2:
+        specifier: ^11.22.5
+        version: 11.22.5
       tailwind-merge:
         specifier: ^2.5.5
         version: 2.5.5
@@ -1367,6 +1373,10 @@ packages:
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
+  nodemailer@7.0.6:
+    resolution: {integrity: sha512-F44uVzgwo49xboqbFgBGkRaiMgtoBrBEWCVincJPK9+S9Adkzt/wXCLKbf7dxucmxfTI5gHGB+bEmdyzN6QKjw==}
+    engines: {node: '>=6.0.0'}
+
   normalize-range@0.1.2:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
@@ -1514,6 +1524,9 @@ packages:
         optional: true
       babel-plugin-macros:
         optional: true
+
+  sweetalert2@11.22.5:
+    resolution: {integrity: sha512-k9gb2M0n4b830FaWDmqaFQULIRvKixTbJOBkTN5KwRNIT8UxjGxusC9g67cj8sCxkJb9nVy2+PgyVd7vYK7cug==}
 
   tailwind-merge@2.5.5:
     resolution: {integrity: sha512-0LXunzzAZzo0tEPxV3I297ffKZPlKDrjj7NXphC8V5ak9yHC5zRmxnOe2m/Rd/7ivsOMJe3JZ2JVocoDdQTRBA==}
@@ -2735,6 +2748,8 @@ snapshots:
 
   node-releases@2.0.19: {}
 
+  nodemailer@7.0.6: {}
+
   normalize-range@0.1.2: {}
 
   picocolors@1.1.1: {}
@@ -2868,6 +2883,8 @@ snapshots:
     dependencies:
       client-only: 0.0.1
       react: 18.0.0
+
+  sweetalert2@11.22.5: {}
 
   tailwind-merge@2.5.5: {}
 
