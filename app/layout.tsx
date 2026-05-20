@@ -18,10 +18,9 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "Mutexly - Powering the Future of AI SaaS Products",
+  title: "Mutexly — AI Services",
   description:
-    "Mutexly is an umbrella company that builds and powers different AI SaaS products, creating innovative solutions for businesses and individuals.",
-  generator: "v0.app",
+    "Mutexly partners with forward-thinking teams to design, build, and deploy AI systems that drive real business outcomes. AI consulting, custom development, automation, and data analytics.",
 }
 
 export default function RootLayout({
@@ -30,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth dark">
       <body
         className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${spaceGrotesk.variable} ${dmSans.variable} overflow-x-hidden`}
         style={{

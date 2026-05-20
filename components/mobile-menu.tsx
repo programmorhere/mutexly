@@ -1,111 +1,93 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { createPortal } from "react-dom"
+import { X, Menu } from "lucide-react"
+
+const navItems = [
+  { href: "/",         label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/about",    label: "About" },
+  { href: "/contact",  label: "Contact" },
+]
 
 export function MobileMenu() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen]   = useState(false)
   const [mounted, setMounted] = useState(false)
+  const router = useRouter()
+
+  useEffect(() => { setMounted(true) }, [])
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "unset"
-    }
-
-    return () => {
-      document.body.style.overflow = "unset"
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "unset"
+    return () => { document.body.style.overflow = "unset" }
   }, [isOpen])
-
-  const menuItems = [
-    { href: "#products", label: "Products" },
-    { href: "#about", label: "About" },
-    { href: "#contact", label: "Contact" },
-  ]
 
   const handleNavClick = (href: string) => {
     setIsOpen(false)
-    setTimeout(() => {
-      document.querySelector(href)?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      })
-    }, 300)
+    setTimeout(() => router.push(href), 280)
   }
 
   const menuContent = (
-    <div className="fixed inset-0 z-[9999] md:hidden">
+    <div className="fixed inset-0 z-9999 md:hidden">
+      {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/60 backdrop-blur-md transition-opacity duration-500 ${
+        className={`fixed inset-0 overlay-backdrop backdrop-blur-sm transition-opacity duration-400 ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}
         onClick={() => setIsOpen(false)}
       />
 
+      {/* Drawer */}
       <div
-        className={`fixed inset-0 bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95 backdrop-blur-xl transition-all duration-700 ease-out ${
-          isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+        className={`fixed inset-y-0 right-0 w-72 bg-card border-l border-border flex flex-col transition-transform duration-400 ease-out ${
+          isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between p-6 border-b border-cyan-500/20">
-          <span className="text-2xl font-bold font-[family-name:var(--font-heading)] text-transparent bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text">
-            Menu
-          </span>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsOpen(false)}
-            className="relative w-12 h-12 rounded-full border border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-500/10 transition-all duration-300 group"
-          >
-            <div className="relative w-6 h-6">
-              <span
-                className={`absolute top-1/2 left-1/2 w-4 h-0.5 bg-cyan-400 transition-all duration-300 ${
-                  isOpen ? "rotate-45 -translate-x-1/2 -translate-y-1/2" : ""
-                }`}
-              />
-              <span
-                className={`absolute top-1/2 left-1/2 w-4 h-0.5 bg-cyan-400 transition-all duration-300 ${
-                  isOpen ? "-rotate-45 -translate-x-1/2 -translate-y-1/2" : ""
-                }`}
-              />
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 py-5 border-b border-border">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 bg-primary rounded-md flex items-center justify-center">
+              <span className="text-primary-foreground font-black text-sm font-heading">M</span>
             </div>
+            <span className="font-black font-heading text-foreground tracking-tight">Mutexly</span>
+          </div>
+          <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}
+            className="w-8 h-8 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg">
+            <X className="h-4 w-4" />
           </Button>
         </div>
 
-        <nav className="flex flex-col items-center justify-center flex-1 space-y-8 px-6">
-          {menuItems.map((item, index) => (
+        {/* Nav links */}
+        <nav className="flex-1 px-4 py-6 flex flex-col gap-1">
+          {navItems.map((item, index) => (
             <button
               key={item.href}
               onClick={() => handleNavClick(item.href)}
-              className={`text-3xl font-bold font-[family-name:var(--font-heading)] text-white hover:text-transparent hover:bg-gradient-to-r hover:from-cyan-400 hover:to-teal-400 hover:bg-clip-text transition-all duration-500 relative group ${
+              className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
                 isOpen ? "animate-fade-in-up" : "opacity-0"
-              }`}
+              } text-muted-foreground hover:text-foreground hover:bg-secondary`}
               style={{
-                animationDelay: isOpen ? `${(index + 1) * 150}ms` : "0ms",
+                animationDelay: isOpen ? `${(index + 1) * 80}ms` : "0ms",
                 animationFillMode: "forwards",
               }}
             >
               {item.label}
-              <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 transition-all duration-300 group-hover:w-full" />
             </button>
           ))}
         </nav>
 
-        <div className="p-6 border-t border-cyan-500/20 text-center">
-          <p className="text-slate-400 text-sm">Ready to transform your business?</p>
-          <a
-            href="mailto:contact@mutexly.com"
-            className="text-cyan-400 hover:text-teal-400 transition-colors duration-300 font-medium"
+        {/* Footer CTA */}
+        <div className="px-4 pb-6 border-t border-border pt-4">
+          <button
+            onClick={() => handleNavClick("/contact")}
+            className="w-full h-10 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/85 transition-colors duration-200"
           >
-            contact@mutexly.com
-          </a>
+            Start a Project
+          </button>
+          <p className="text-center text-xs text-muted-foreground mt-3 font-mono">info@mutexly.com</p>
         </div>
       </div>
     </div>
@@ -116,24 +98,10 @@ export function MobileMenu() {
       <Button
         variant="ghost"
         size="icon"
-        className="md:hidden relative w-12 h-12 rounded-full border border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-500/10 transition-all duration-300 group"
+        className="md:hidden w-9 h-9 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors"
         onClick={() => setIsOpen(true)}
       >
-        <div className="relative w-6 h-6 flex flex-col justify-center items-center">
-          <span
-            className={`w-5 h-0.5 bg-cyan-400 transition-all duration-300 ${
-              isOpen ? "rotate-45 translate-y-0" : "translate-y-[-4px]"
-            }`}
-          />
-          <span
-            className={`w-5 h-0.5 bg-cyan-400 transition-all duration-300 ${isOpen ? "opacity-0" : "opacity-100 my-1"}`}
-          />
-          <span
-            className={`w-5 h-0.5 bg-cyan-400 transition-all duration-300 ${
-              isOpen ? "-rotate-45 translate-y-0" : "translate-y-[4px]"
-            }`}
-          />
-        </div>
+        <Menu className="h-5 w-5" />
       </Button>
 
       {mounted && isOpen && createPortal(menuContent, document.body)}

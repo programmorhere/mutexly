@@ -130,9 +130,9 @@ export function ParticleBackground() {
       lastFrameTime.current = currentTime
 
       const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-      gradient.addColorStop(0, "rgba(15, 23, 42, 0.95)")
-      gradient.addColorStop(0.5, "rgba(15, 23, 42, 0.98)")
-      gradient.addColorStop(1, "rgba(15, 23, 42, 1)")
+      gradient.addColorStop(0, "rgba(9, 7, 18, 0.95)")
+      gradient.addColorStop(0.5, "rgba(9, 7, 18, 0.98)")
+      gradient.addColorStop(1, "rgba(9, 7, 18, 1)")
       ctx.fillStyle = gradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
