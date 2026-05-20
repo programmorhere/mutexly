@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -19,9 +20,14 @@ export function Header() {
     <header className="glass-card border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between max-w-7xl">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <span className="text-primary-foreground font-black text-base font-heading">M</span>
-          </div>
+          <Image
+            src="/logo/icon-app-purple.png"
+            alt="Mutexly logo mark"
+            width={32}
+            height={32}
+            className="rounded-lg"
+            priority
+          />
           <span className="text-xl font-black font-heading text-foreground tracking-tight">Mutexly</span>
         </Link>
 

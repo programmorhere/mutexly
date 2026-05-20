@@ -21,6 +21,33 @@ export const metadata: Metadata = {
   title: "Mutexly — AI Services",
   description:
     "Mutexly partners with forward-thinking teams to design, build, and deploy AI systems that drive real business outcomes. AI consulting, custom development, automation, and data analytics.",
+  icons: {
+    icon: [
+      { url: "/logo/icon-app-purple.png", type: "image/png" },
+      { url: "/logo/icon-mark-light.png", type: "image/png" },
+    ],
+    apple: [{ url: "/logo/icon-app-purple.png", type: "image/png" }],
+    shortcut: ["/logo/icon-app-purple.png"],
+  },
+  openGraph: {
+    title: "Mutexly — AI Services",
+    description:
+      "Enterprise-grade AI consulting, custom development, automation, and analytics.",
+    images: [
+      {
+        url: "/logo/logo-horizontal-gradient-dark.png",
+        alt: "Mutexly logo",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mutexly — AI Services",
+    description:
+      "Enterprise-grade AI consulting, custom development, automation, and analytics.",
+    images: ["/logo/logo-horizontal-gradient-dark.png"],
+  },
 }
 
 export default function RootLayout({

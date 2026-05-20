@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -49,9 +50,13 @@ export function MobileMenu() {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-border">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 bg-primary rounded-md flex items-center justify-center">
-              <span className="text-primary-foreground font-black text-sm font-heading">M</span>
-            </div>
+            <Image
+              src="/logo/icon-app-purple.png"
+              alt="Mutexly logo mark"
+              width={28}
+              height={28}
+              className="rounded-md"
+            />
             <span className="font-black font-heading text-foreground tracking-tight">Mutexly</span>
           </div>
           <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}

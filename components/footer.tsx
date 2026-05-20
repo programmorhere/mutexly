@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 
 export function Footer() {
@@ -7,9 +8,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-7 h-7 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-black text-sm font-heading">M</span>
-              </div>
+              <Image
+                src="/logo/icon-app-purple.png"
+                alt="Mutexly logo mark"
+                width={28}
+                height={28}
+                className="rounded-lg"
+              />
               <span className="text-lg font-black font-heading text-foreground tracking-tight">Mutexly</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
