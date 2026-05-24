@@ -6,6 +6,7 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Brain, Code2, Zap, BarChart2, ArrowRight, Search, Paintbrush, Hammer, Rocket } from "lucide-react"
+import { HealthcareOfferings } from "@/components/healthcare-offerings"
 
 const services = [
   {
@@ -92,6 +93,8 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      <HealthcareOfferings />
 
       {/* How we work */}
       <section className="py-24 px-4 border-t border-border">

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { createPortal } from "react-dom"
 import { X, Menu } from "lucide-react"
+import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_E164 } from "@/lib/site"
 
 const navItems = [
   { href: "/",         label: "Home" },
@@ -92,7 +93,14 @@ export function MobileMenu() {
           >
             Start a Project
           </button>
-          <p className="text-center text-xs text-muted-foreground mt-3 font-mono">info@mutexly.com</p>
+          <div className="text-center text-xs text-muted-foreground mt-3 font-mono space-y-1">
+            <a href={`mailto:${SITE_EMAIL}`} className="block hover:text-foreground transition-colors">
+              {SITE_EMAIL}
+            </a>
+            <a href={`tel:${SITE_PHONE_E164}`} className="block hover:text-foreground transition-colors">
+              {SITE_PHONE_DISPLAY}
+            </a>
+          </div>
         </div>
       </div>
     </div>

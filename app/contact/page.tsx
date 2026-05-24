@@ -10,7 +10,9 @@ import { Textarea } from "@/components/ui/textarea"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { ArrowRight, Mail, Clock, Loader2, CircleCheckBig } from "lucide-react"
+import { ArrowRight, Mail, Phone, Clock, Loader2, CircleCheckBig } from "lucide-react"
+import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_E164 } from "@/lib/site"
+import { healthcareContactOptions } from "@/lib/healthcare-services"
 
 const schema = z.object({
   fullName:           z.string().min(2, "Name must be at least 2 characters"),
@@ -22,13 +24,14 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>
 
-const serviceOptions = [
+const coreServiceOptions = [
   "AI Consulting",
   "Custom AI Development",
   "AI Automation",
   "Data & Analytics",
-  "Not sure yet",
 ]
+
+const serviceOptions = [...coreServiceOptions, ...healthcareContactOptions, "Not sure yet"]
 
 export default function ContactPage() {
   const [showInquiryModal, setShowInquiryModal] = useState(false)
@@ -179,8 +182,20 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs font-mono tracking-wider uppercase text-muted-foreground mb-1.5">Direct email</p>
-                    <a href="mailto:info@mutexly.com" className="text-sm text-primary hover:text-primary/80 transition-colors">
-                      info@mutexly.com
+                    <a href={`mailto:${SITE_EMAIL}`} className="text-sm text-primary hover:text-primary/80 transition-colors">
+                      {SITE_EMAIL}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="rounded-xl bg-card border border-border p-6 flex items-start gap-4">
+                  <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <Phone className="h-4 w-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-mono tracking-wider uppercase text-muted-foreground mb-1.5">Phone</p>
+                    <a href={`tel:${SITE_PHONE_E164}`} className="text-sm text-primary hover:text-primary/80 transition-colors">
+                      {SITE_PHONE_DISPLAY}
                     </a>
                   </div>
                 </div>

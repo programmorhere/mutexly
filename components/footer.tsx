@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_E164 } from "@/lib/site"
 
 export function Footer() {
   return (
@@ -57,7 +58,14 @@ export function Footer() {
           <p className="text-xs text-muted-foreground font-mono">
             &copy; {new Date().getFullYear()} Mutexly. All rights reserved.
           </p>
-          <p className="text-xs text-muted-foreground font-mono">info@mutexly.com</p>
+          <div className="flex flex-col sm:items-end gap-1 text-xs text-muted-foreground font-mono">
+            <a href={`mailto:${SITE_EMAIL}`} className="hover:text-foreground transition-colors">
+              {SITE_EMAIL}
+            </a>
+            <a href={`tel:${SITE_PHONE_E164}`} className="hover:text-foreground transition-colors">
+              {SITE_PHONE_DISPLAY}
+            </a>
+          </div>
         </div>
       </div>
     </footer>

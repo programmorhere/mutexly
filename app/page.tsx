@@ -7,6 +7,7 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { AnimatedCounter } from "@/components/animated-counter"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { HealthcareOfferings } from "@/components/healthcare-offerings"
 import { ArrowRight, Brain, Code2, Zap, BarChart2, Quote, Activity } from "lucide-react"
 import { brandAlpha } from "@/lib/theme-colors"
 
@@ -357,6 +358,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <HealthcareOfferings showViewAll />
 
       {/* ── Stats ─────────────────────────────────────────────────────────── */}
       <section className="border-y border-border py-14 px-4">
